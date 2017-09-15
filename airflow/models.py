@@ -1939,6 +1939,9 @@ class SkipMixin(object):
             session.commit()
         session.close()
 
+        for task in tasks:
+            self.skip(dag_run, execution_date, task.downstream_list)
+
 
 @functools.total_ordering
 class BaseOperator(LoggingMixin):
